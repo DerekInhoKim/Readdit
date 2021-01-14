@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import LogoutButton from './auth/LogoutButton';
 import searchFetch from '../services/search'
 
@@ -9,6 +10,17 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
   const [menuToggle, setMenuToggle] = useState(false)
   const [searchToggle, setSearchToggle] = useState(false)
   const [searchList, setSearchList] = useState([])
+  const [user, setUser] = useState('')
+  let currentUser = useSelector(state => state.users.user)
+
+  if(!currentUser){
+    currentUser = {}
+  }
+
+  useEffect(() => {
+    setUser(currentUser.username)
+
+  }, [currentUser])
 
   const updateValue= async (e) => {
     await setSearch(e.target.value)
@@ -47,6 +59,10 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
       </div> : ''}
       </>)
   }
+
+  // if(authenticated){
+  //   // window.location.reload()
+  // }
 
   return (
     <header id="header">
@@ -116,7 +132,7 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
           {authenticated ? (
             <>
             <div className= "navbar-username">
-              Hello {username}!
+              Hello {user}!
             </div>
             <div  className= "navbar-profile-link">
               <NavLink to={`/users/${id}`} exact={true} activeClassName="active">
@@ -131,12 +147,11 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
                 <div className="navbar_user_router">
                   <NavLink to="/sign-up" exact={true} activeClassName="active">
                     Sign up
-              </NavLink> in
-                seconds. Or {' '}
-                  <NavLink to="/login" exact={true} activeClassName="active">
-                    Login
-              </NavLink>
-
+                  </NavLink> in
+                    seconds. Or {' '}
+                      <NavLink to="/login" exact={true} activeClassName="active">
+                        Login
+                  </NavLink>
                 </div>
               </div>
             )}
