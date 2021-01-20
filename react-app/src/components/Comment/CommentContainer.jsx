@@ -2,6 +2,7 @@ import React, { useState, useReducer } from 'react'
 import { useEffect } from 'react';
 import Comment from '../Comment/Comment'
 import CommentForm from '../Comment/CommentForm'
+import {getComments} from '../../services/comments'
 import reducer from '../../services/commentReducer'
 
 
@@ -25,7 +26,7 @@ function nestComments(commentList) {
                 parent.children = [comment]
             }
         }
-    
+
     });
 
     // filter the list to return a list of correctly nested comments
@@ -37,6 +38,8 @@ function nestComments(commentList) {
 const CommentContainer = ({postId}) => {
     const [loading, setLoading] = useState(true)
     const [state, dispatch] = useReducer(reducer, [])
+    const [postComments, setPostComments] = useState([])
+
 
     useEffect(() => {
         let mounted = true
@@ -60,23 +63,32 @@ const CommentContainer = ({postId}) => {
         }
     }, [])
 
-    var commentHeader = '';
-    if (state) {
-        if (state.length > 1) {
-            commentHeader = `all ${state.length} Comments`;
-        } else {
-            commentHeader = `1 Comment`;
-        }
-    } else {
-        commentHeader = 'No comments';
-    }
+    // This useEffect will set the postComments that will be used to display the commentHeader
+    useEffect(() => {
+        (async () => {
+            const commentResponse = await getComments(postId)
+            await setPostComments(commentResponse.comments)
+        })()
+    }, [])
+
+    // var commentHeader = '';
+    // if (state) {
+    //     if (state.length > 1) {
+    //         commentHeader = `all ${state.length} Comments`;
+    //     } else {
+    //         commentHeader = `1 Comment`;
+    //     }
+    // } else {
+    //     commentHeader = 'No comments';
+    // }
 
     return (
         <div> {loading && state ? <div>loading</div> :
         <>
             < div >
                 <h4>
-                    {commentHeader}
+                    {/* {commentHeader} */}
+                    {postComments.length} Comments
                 </h4>
                 <hr />
             </div >
