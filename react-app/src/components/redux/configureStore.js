@@ -9,7 +9,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //Use the combine reducers to manage all of our slices of state
 const reducer = combineReducers({
     users,
-    comments
+    comments,
 })
 
 

@@ -1,9 +1,11 @@
 import React, { useState, useReducer } from 'react'
 import { useEffect } from 'react';
+import {useDispatch} from 'react-redux'
 import Comment from '../Comment/Comment'
 import CommentForm from '../Comment/CommentForm'
 import {getComments} from '../../services/comments'
 import reducer from '../../services/commentReducer'
+import {setUpComments} from '../redux/actions/comments'
 
 
 
@@ -39,6 +41,7 @@ const CommentContainer = ({postId}) => {
     const [loading, setLoading] = useState(true)
     const [state, dispatch] = useReducer(reducer, [])
     const [postComments, setPostComments] = useState([])
+    const dispatched = useDispatch()
 
 
     useEffect(() => {
@@ -49,7 +52,8 @@ const CommentContainer = ({postId}) => {
 
             if (!comments.errors && mounted) {
                 setLoading(false)
-                dispatch({ type: 'GET_COMMENT', item: comments.comments })
+                // dispatch(setUpComments(comments.comments))
+                // debugger;
             }
         }
 
@@ -68,6 +72,8 @@ const CommentContainer = ({postId}) => {
         (async () => {
             const commentResponse = await getComments(postId)
             await setPostComments(commentResponse.comments)
+            debugger
+            dispatched(setUpComments(commentResponse.comments))
         })()
     }, [])
 
