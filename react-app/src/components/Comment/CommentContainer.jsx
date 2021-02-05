@@ -52,7 +52,7 @@ const CommentContainer = ({postId}) => {
 
             if (!comments.errors && mounted) {
                 setLoading(false)
-                // dispatch(setUpComments(comments.comments))
+                dispatch({ type: 'GET_COMMENT', item: comments.comments })
                 // debugger;
             }
         }
