@@ -457,10 +457,17 @@ TODO Fix the top menu alignments etc
  font-weight: bold;
 }
 
+.comment_container_div{
+  margin-left: 1rem;
+}
 
 .comment-author a {
   text-decoration: none;
   border-bottom: 1px dotted gray;
+}
+
+.comment-author span {
+  cursor: pointer;
 }
 
 .comments button {
@@ -484,6 +491,7 @@ TODO Fix the top menu alignments etc
   font-size: small;
   font-weight: bold;
   color: #666666;
+  margin-left: 1rem;
 }
 
 .comment-body {

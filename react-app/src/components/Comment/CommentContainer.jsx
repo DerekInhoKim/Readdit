@@ -42,7 +42,6 @@ const CommentContainer = ({postId}) => {
     const [loading, setLoading] = useState(true)
     const [initialComment, setInnitialComment] = useState(false)
     const [state, dispatch] = useReducer(reducer, [])
-    const [postComments, setPostComments] = useState([])
     const [postCommentsLength, setPostCommentsLength] = useState(0)
     const dispatched = useDispatch()
 
