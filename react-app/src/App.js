@@ -31,7 +31,7 @@ function App() {
       const user = await authenticate();
       setUser(user)
       if (!user.errors) {
-        debugger;
+        // debugger;
         dispatch(setUpUser(user));
         setAuthenticated(true);
         setSubscriptions({type: 'ADD', subscriptions: user.subscriptions})

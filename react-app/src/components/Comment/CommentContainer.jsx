@@ -40,6 +40,7 @@ function nestComments(commentList) {
 const CommentContainer = ({postId}) => {
     const postCommentsState = useSelector(state => state.comments)
     const [loading, setLoading] = useState(true)
+    const [initialComment, setInnitialComment] = useState(false)
     const [state, dispatch] = useReducer(reducer, [])
     const [postComments, setPostComments] = useState([])
     const [postCommentsLength, setPostCommentsLength] = useState(0)
@@ -72,13 +73,29 @@ const CommentContainer = ({postId}) => {
     // This useEffect will set the postComments that will be used to display the commentHeader
     useEffect(() => {
         (async () => {
-            const commentResponse = await getComments(postId)
-            await setPostCommentsLength(commentResponse.comments.length)
-            // debugger
-            dispatched(setUpComments(commentResponse.comments))
-            console.log(postCommentsState)
+            if(!initialComment){
+                const commentResponse = await getComments(postId)
+                await setPostCommentsLength(commentResponse.comments.length)
+                // debugger
+                dispatched(setUpComments(commentResponse.comments))
+                await setInnitialComment(true)
+                // console.log(postCommentsState)
+
+            } else {
+                let size = 0
+                for(let key in postCommentsState){
+                    if(key){
+                        size++
+                    }
+                }
+                await setPostCommentsLength(size)
+            }
         })()
-    }, [])
+    }, [postCommentsState])
+
+
+
+
 
     // var commentHeader = '';
     // if (state) {
