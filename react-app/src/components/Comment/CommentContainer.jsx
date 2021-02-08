@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from 'react'
 import { useEffect } from 'react';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import Comment from '../Comment/Comment'
 import CommentForm from '../Comment/CommentForm'
 import {getComments} from '../../services/comments'
@@ -38,9 +38,11 @@ function nestComments(commentList) {
 }
 
 const CommentContainer = ({postId}) => {
+    const postCommentsState = useSelector(state => state.comments)
     const [loading, setLoading] = useState(true)
     const [state, dispatch] = useReducer(reducer, [])
     const [postComments, setPostComments] = useState([])
+    const [postCommentsLength, setPostCommentsLength] = useState(0)
     const dispatched = useDispatch()
 
 
@@ -71,9 +73,10 @@ const CommentContainer = ({postId}) => {
     useEffect(() => {
         (async () => {
             const commentResponse = await getComments(postId)
-            await setPostComments(commentResponse.comments)
-            debugger
+            await setPostCommentsLength(commentResponse.comments.length)
+            // debugger
             dispatched(setUpComments(commentResponse.comments))
+            console.log(postCommentsState)
         })()
     }, [])
 
@@ -94,7 +97,7 @@ const CommentContainer = ({postId}) => {
             < div >
                 <h4>
                     {/* {commentHeader} */}
-                    {postComments.length} Comments
+                    {postCommentsLength} Comments
                 </h4>
                 <hr />
             </div >

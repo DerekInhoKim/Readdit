@@ -1,7 +1,10 @@
 import React , {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {addComment} from '../../components/redux/actions/comments'
 
 const CommentForm = (props) => {
     const [content, setContent] = useState('')
+    const dispatched = useDispatch()
     function handleSubmit(event, props) {
         event.preventDefault();
 
@@ -24,6 +27,7 @@ const CommentForm = (props) => {
             if (!res.errors) {
                 // debugger;
                 props.dispatch({ type: 'SUBMIT_COMMENT', item: res })
+                dispatched(addComment(res))
                 // Do some app logic
             }
         })

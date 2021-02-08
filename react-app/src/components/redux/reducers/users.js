@@ -3,7 +3,7 @@ import {SET_USER, REMOVE_USER} from '../actions/users'
 const initialState = {}
 
 const userReducer = (state = initialState, action) => {
-    debugger;
+    // debugger;
     switch(action.type){
         case SET_USER:
             // refactor to spread action.user
