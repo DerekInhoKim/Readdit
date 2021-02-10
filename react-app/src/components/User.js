@@ -100,7 +100,7 @@ function User({ id }) {
       </div>
       <div id='container'>
         <ul>{postComponents}</ul>
-        <UserSidebar className="user-sidebar" name={user.username} created={user.created_at} karma={karma} />
+        <UserSidebar className="user-sidebar" name={user.username} userId={user.id} created={user.created_at} karma={karma} />
       </div>
     </div>
   );
