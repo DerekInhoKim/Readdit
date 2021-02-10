@@ -90,10 +90,10 @@ const PostForm = ({authenticated}) => {
     }
   }
 
-  if (authenticated) {
-    // console.log('redirect')
-    return history.push("/login");
-  }
+  // if (authenticated) {
+  //   // console.log('redirect')
+  //   return history.push("/login");
+  // }
 
   if (redirect) {
       return <Redirect to={`/r/${subreddit}`} />

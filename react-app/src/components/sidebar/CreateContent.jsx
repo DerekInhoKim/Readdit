@@ -25,7 +25,7 @@ const CreateContent = ({ name, about, created, rules, subCount, authenticated })
             return ''
           }
         })}
-        <NavLink style={{ width: 'fit-content', textDecoration: 'none' }} to={authenticated ? "/posts/create" : "/login"} exact={true} activeClassName="active">
+        <NavLink style={{ width: 'fit-content', textDecoration: 'none' }} to="/posts/create" exact={true} activeClassName="active">
           <div className="create__btn">
               Create Post
           </div>
