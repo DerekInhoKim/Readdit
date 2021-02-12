@@ -21,7 +21,7 @@ const UserSidebar = ({ name, id, created, karma }) => {
         <div className="about__date"> Birthday: {created}</div>
         <div className="about__date"> Karma: {karma}</div>
       </div>
-      {isUser ? "" : <div className='rules__container'>
+      {!isUser ? "" : <div className='rules__container'>
         <NavLink style={{ width: 'fit-content', textDecoration: 'none' }} to="/subreddits/create" exact={true} activeClassName="active">
           <div className="create__btn">
               Create Subreddit
