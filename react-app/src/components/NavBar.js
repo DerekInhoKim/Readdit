@@ -10,6 +10,7 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
   const [menuToggle, setMenuToggle] = useState(false)
   const [searchToggle, setSearchToggle] = useState(false)
   const [searchList, setSearchList] = useState([])
+  const [searchActive, setSearchActive] = useState(false)
   const [user, setUser] = useState('')
   let currentUser = useSelector(state => state.users.user)
 
@@ -43,6 +44,10 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
 
   const showSearch = () => {
     setSearchToggle(!searchToggle)
+  }
+
+  const setActive = async () => {
+    await setSearchActive(!searchActive)
   }
 
   const selectOptions = (arr, toggle) => {
@@ -90,7 +95,14 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
         <div className="search__container">
 
           <div className="search__elements">
-            <button className="search" onClick={searchRes}></button>
+            <button className={searchActive ? "search_active" : "search"}
+              onClick={
+                () => {
+                  searchRes();
+                  setActive();
+                  }
+                }
+            ></button>
             <div className="search__bar" onClick={showSearch}>
               {authenticated ?
                 <input

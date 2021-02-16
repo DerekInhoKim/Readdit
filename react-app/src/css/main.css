@@ -1050,6 +1050,19 @@ button.spacing__extra {
   margin-right: 5px;
 }
 
+.search_active {
+  background-image: url("https://cdn0.iconfinder.com/data/icons/it-hardware/100/search-512.png");
+  background-size: cover;
+  display: flex;
+  flex: 1;
+  width: 15%;
+  height: 15%;
+  border: 2px solid red;
+  font-size: 0.9rem;
+  padding: 4.5%;
+  margin-right: 5px;
+}
+
 .search__bar{
   margin-right: 20px;
 }
