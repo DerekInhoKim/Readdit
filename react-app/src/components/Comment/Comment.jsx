@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import CommentForm from './CommentForm';
 
 
 function Comment({ comment, userid, dispatch, postId }) {
+    const postCommentState = useSelector(state => state.comments)
     const [showChildren, setShowChildren] = useState(true);
     const [showCommentBox, setCommentBox] = useState(false);
     const [replies, addNewReply] = useState([])
+
+    useEffect(() => {
+        if(showCommentBox){
+            setCommentBox(!showCommentBox)
+        }
+    }, [postCommentState])
 
     // this causes the data to check if there are more "children" comments under
     // the current comment. If there are then is recursively renders more of this
@@ -16,6 +23,7 @@ function Comment({ comment, userid, dispatch, postId }) {
     const nestedComments = (comment.children ? comment.children : []).map(comment => {
         return <Comment key={comment.id} userid={comment.userid} comment={comment} type="child" dispatch={dispatch} postId={postId} />
     })
+
 
     // function formHandle(event) {
     //     event.preventDefault()

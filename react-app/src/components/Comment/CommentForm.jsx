@@ -1,8 +1,9 @@
-import React , {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import React , {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {addComment} from '../../components/redux/actions/comments'
 
 const CommentForm = (props) => {
+    const postCommentState = useSelector(state => state.comments)
     const [content, setContent] = useState('')
     const dispatched = useDispatch()
     function handleSubmit(event, props) {
@@ -28,6 +29,7 @@ const CommentForm = (props) => {
                 // debugger;
                 props.dispatch({ type: 'SUBMIT_COMMENT', item: res })
                 dispatched(addComment(res))
+                setContent('')
                 // Do some app logic
             }
         })
@@ -39,13 +41,13 @@ const CommentForm = (props) => {
         setContent(event.target.value)
     }
 
-    return (<div className="comment-form">
-        <form onSubmit={(event) => handleSubmit(event, props)}>
-            <textarea onChange={updateContent} name="body" rows="5" value={content}></textarea>
-            <button>save</button>
-        </form>
-
-    </div>
+    return (
+        <div className="comment-form">
+            <form onSubmit={(event) => handleSubmit(event, props)}>
+                <textarea onChange={updateContent} name="body" rows="5" value={content}></textarea>
+                <button>save</button>
+            </form>
+        </div>
     )
 }
 
