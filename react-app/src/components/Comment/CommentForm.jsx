@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addComment} from '../../components/redux/actions/comments'
 
 const CommentForm = (props) => {
-    const postCommentState = useSelector(state => state.comments)
+
     const [content, setContent] = useState('')
     const dispatched = useDispatch()
     function handleSubmit(event, props) {
