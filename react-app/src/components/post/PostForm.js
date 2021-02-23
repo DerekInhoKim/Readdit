@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { createPost, uploadImage } from '../../services/post';
 import { getSubreddits } from '../../services/subreddit'
 
@@ -14,8 +14,6 @@ const PostForm = ({authenticated}) => {
   const [redirect, setRedirect] = useState(false)
   const [image, setImage] = useState({})
 
-  const history = useHistory();
-
   // Calls the helper function when the component is loaded
   useEffect(() => {
     getAllSubreddits()
@@ -28,7 +26,7 @@ const PostForm = ({authenticated}) => {
         setSubreddit(oneSub.name)
       }
     }
-  }, [subredditId])
+  }, [subredditId, subreddits])
 
   // Helper function to make a fetch request and set subreddits to be displayed in the select field.
   // Sets the currently selected subredditId to be the id from first element.

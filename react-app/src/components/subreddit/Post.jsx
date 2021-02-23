@@ -11,7 +11,7 @@ const Post = ({title, type, content, username, subreddit, created_on, id, userId
       const response = await getComments(id)
       setComments(response.comments.length)
     })()
-  }, [])
+  }, [id])
 
 
   if (type === 'image'){
@@ -22,7 +22,7 @@ const Post = ({title, type, content, username, subreddit, created_on, id, userId
           <a href={`/r/${subreddit}`}>{`r/${subreddit}`}</a> <span>Posted by</span> <a href={`/users/${userId}`}>{`${username}`}</a>  created on {created_on}
         </div>
           <Link to={`/r/${subreddit}/post/${id}`}>
-            <img className="post-img" src={content}/>
+            <img className="post-img" src={content} alt={title}/>
           </Link>
         <div className='meta-area'>
           <Link to={`/r/${subreddit}/post/${id}`}>

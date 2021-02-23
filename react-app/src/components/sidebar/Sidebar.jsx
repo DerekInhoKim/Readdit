@@ -5,12 +5,11 @@ import sideContent from '../../services/sidebar'
 
 const Sidebar= ({ username }) => {
 
-  const [followed, setFollowed] = useState({});
   const [topSubs, setTopSubs] = useState([]);
 
-  const updateValue = (func) => async (e) => {
-    await func(e.target.value)
-  }
+  // const updateValue = (func) => async (e) => {
+  //   await func(e.target.value)
+  // }
 
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const Sidebar= ({ username }) => {
             setTopSubs(subResults.top_subreddits)
           }
         })();
-      }, [])
+      }, [username])
 
 
     return(

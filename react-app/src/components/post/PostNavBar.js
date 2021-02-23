@@ -20,7 +20,7 @@ const PostNavbar = () => {
                 setErrors(post.errors);
             }
         })();
-    }, [postId])
+    }, [postId, post.errors])
 
     const handleClick = () => {
         return setRedirect(true)

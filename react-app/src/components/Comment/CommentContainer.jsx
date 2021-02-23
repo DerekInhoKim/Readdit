@@ -67,7 +67,7 @@ const CommentContainer = ({postId}) => {
         return () => {
             mounted = false
         }
-    }, [])
+    }, [postId])
 
     // This useEffect will set the postComments that will be used to display the commentHeader
     useEffect(() => {
@@ -90,7 +90,7 @@ const CommentContainer = ({postId}) => {
                 await setPostCommentsLength(size)
             }
         })()
-    }, [postCommentsState])
+    }, [postCommentsState, dispatched, initialComment, postId])
 
 
 

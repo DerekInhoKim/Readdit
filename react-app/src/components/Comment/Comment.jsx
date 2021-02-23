@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import { connect, useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import CommentForm from './CommentForm';
 
 
@@ -14,7 +14,7 @@ function Comment({ comment, userid, dispatch, postId }) {
         if(showCommentBox){
             setCommentBox(!showCommentBox)
         }
-    }, [postCommentState])
+    }, [postCommentState ])
 
     // this causes the data to check if there are more "children" comments under
     // the current comment. If there are then is recursively renders more of this

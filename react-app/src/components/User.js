@@ -10,7 +10,7 @@ function User({ id }) {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([])
   const [karma, setKarma] = useState(0)
-  const [display, setDisplay] = useState('')
+  // const [display, setDisplay] = useState('')
   // Notice we use useParams here instead of getting the params
   // From props.
   const { userId }  = useParams();
@@ -44,14 +44,14 @@ function User({ id }) {
     setKarma(num)
   }, [posts])
 
-  const setPostDisplay = () => {
-    setDisplay('post')
-  }
+  // const setPostDisplay = () => {
+  //   setDisplay('post')
+  // }
 
-  const setCommentsDisplay = () => {
-    // console.log(posts)
-    setDisplay('comments')
-  }
+  // const setCommentsDisplay = () => {
+  //   // console.log(posts)
+  //   setDisplay('comments')
+  // }
 
   // const goToPost = (subreddit, postId) => {
   //   console.log('working')

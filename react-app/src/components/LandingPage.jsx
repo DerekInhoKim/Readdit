@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {Link } from 'react-router-dom';
 import Post from './subreddit/Post'
 import PostKarma from './karma/PostKarma.jsx'
 import loadingGif from '../img/loading.gif'

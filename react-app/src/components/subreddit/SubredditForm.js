@@ -4,15 +4,15 @@ import { createSubreddit } from '../../services/subreddit';
 import Rule from './Rules'
 
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "add-rule":
-      return { rules: [...state.rules, { text:action.text }] };
-    default:
-      return state
-  }
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "add-rule":
+//       return { rules: [...state.rules, { text:action.text }] };
+//     default:
+//       return state
+//   }
 
-}
+// }
 
 
 const SubredditForm = ({authenticated}) => {

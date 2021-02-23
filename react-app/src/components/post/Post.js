@@ -24,7 +24,7 @@ const Post = () => {
                 setErrors(post.errors);
             }
         })();
-    }, [postId])
+    }, [postId, post.errors])
 
     if(post.type === 'image'){
         return(
@@ -39,7 +39,7 @@ const Post = () => {
                     </div>
                     <h1 className='post_title'>{post.title}</h1>
                     <div>
-                        <img className='image_display' src={post.content} />
+                        <img className='image_display' src={post.content} alt={post.title}/>
                     </div>
                     <div>
                         <CommentContainer postId={postId}/>
