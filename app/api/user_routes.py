@@ -41,9 +41,7 @@ def subscriptions():
 @user_routes.route('/subscriptions', methods=['POST', 'DELETE'])
 @login_required
 def toggle_subscriptions():
-    print(request.is_json)
     req_data = request.get_json()
-    print(req_data)
     subreddit_name = req_data['subreddit']
 
     subreddit = Subreddit.query.filter(Subreddit.name == subreddit_name).first()

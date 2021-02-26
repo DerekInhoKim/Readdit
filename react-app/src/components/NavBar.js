@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import {getSubscriptions} from '../services/subscriptions'
 import {useSelector} from 'react-redux'
 import LogoutButton from './auth/LogoutButton';
 import searchFetch from '../services/search'
 
 
-const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }) => {
+const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions}) => {
   const [search, setSearch] = useState('')
   const [menuToggle, setMenuToggle] = useState(false)
   const [searchToggle, setSearchToggle] = useState(false)
   const [searchList, setSearchList] = useState([])
   const [searchActive, setSearchActive] = useState(false)
+  // const [subscriptions, setSubscriptions] = useState([])
   const [user, setUser] = useState('')
   let currentUser = useSelector(state => state.users.user)
 
@@ -18,10 +20,20 @@ const NavBar = ({ username, id, authenticated, setAuthenticated, subscriptions }
     currentUser = {}
   }
 
+  console.log(subscriptions)
+
   useEffect(() => {
     setUser(currentUser.username)
 
   }, [currentUser])
+
+  // This useEffect will fetch subscribed subreddits for a user if the user is logged in
+  // useEffect(() => {
+  //   if(currentUser){
+  //     let userSubs = getSubscriptions()
+  //     setSubscriptions(userSubs)
+  //   }
+  // },[currentUser])
 
   const updateValue= async (e) => {
     await setSearch(e.target.value)

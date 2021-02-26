@@ -22,6 +22,5 @@ export const getOneSubreddit = async (name) => {
 
 export const getSubreddits = async () => {
   const response = await fetch('/api/subreddits/all')
-
   return await response.json()
 }

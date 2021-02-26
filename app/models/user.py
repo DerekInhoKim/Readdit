@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
         secondary='subreddit_subscriptions',
         # cascade='all, delete'
         )
-    comments = db.relationship('Comment', back_populates='user')    
+    comments = db.relationship('Comment', back_populates='user')
 
     @property
     def password(self):
@@ -51,6 +51,10 @@ class User(db.Model, UserMixin):
 
     # Returns all information for a user
     def to_joined_dict(self):
+
+        subscriptions = [subreddit.name
+            for subreddit in self.subscriptions]
+
         return {
             "id": self.id,
             "username": self.username,
@@ -58,4 +62,5 @@ class User(db.Model, UserMixin):
             'subreddits': [subreddit.to_dict() for subreddit in self.subreddits],
             "posts": [post.to_simple_dict() for post in self.posts],
             "created_at": self.created_at,
+            "subscriptions": subscriptions
         }

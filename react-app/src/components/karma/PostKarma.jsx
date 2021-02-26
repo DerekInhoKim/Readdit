@@ -29,7 +29,7 @@ const PostKarma = ({id}) => {
       if(downvoteResponse.likes === true){
       }
     })()
-  }, [id, user.id])
+  }, [id])
 
 
   useEffect(() => {
