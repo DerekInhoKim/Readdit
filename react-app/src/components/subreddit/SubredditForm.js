@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { createSubreddit } from '../../services/subreddit';
 import Rule from './Rules'
 
@@ -21,6 +21,7 @@ const SubredditForm = ({authenticated}) => {
   const [about, setAbout] = useState('');
   const [ruleIds, setRuleIds] = useState([1])
   const [rules, setRules] = useState([]);
+  const history = useHistory()
 
   const updateValue = (setfunc) => (e) => {
     setfunc(e.target.value)
@@ -36,7 +37,7 @@ const SubredditForm = ({authenticated}) => {
     e.preventDefault();
     const subreddit = await createSubreddit(name, about, rules);
     if (!subreddit.errors) {
-      return <Redirect to='/r/subreddit.name' />
+      history.push(`/r/${subreddit.name}`)
     } else {
       setErrors(subreddit.errors)
     }

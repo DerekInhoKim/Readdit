@@ -52,8 +52,8 @@ def subreddit_posts(subreddit):
     posts = db.session.query(Post).join(Subreddit).join(User)\
         .filter(Subreddit.name == subreddit).all()
     print(posts)
-    if len(posts) == 0:
-        return {"errors": "There are no posts in this subreddit"}, 404
+    # if len(posts) == 0:
+    #     return {"errors": "There are no posts in this subreddit"}, 404
     return {"posts": [post.to_joined_dict() for post in posts]}
 
 @post_routes.route("/user/<string:userId>", methods=["GET"])
